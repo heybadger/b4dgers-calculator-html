@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <meta name="theme-color" content="#1d7a36" />
+    <title>B4DGERS CALCULATOR</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container" id="app">
+      <div class="top-bar">
+        <div class="panel-toggle">
+          <button class="toggle-btn active" id="showSciBtn">Scientific</button>
+          <button class="toggle-btn" id="showGwaBtn">GWA Calculator</button>
+        </div>
+        <div class="theme-switch-wrapper">
+          <span class="switch-label" id="themeLabel">Light</span>
+          <label class="theme-switch">
+            <input type="checkbox" id="themeCheckbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="sciPanel" class="calc-panel active">
+        <div class="sci-top-bar">
+          <div class="angle-toggle" role="group" aria-label="Angle mode">
+            <button id="degBtn" class="active" type="button">DEG</button>
+            <button id="radBtn" type="button">RAD</button>
+          </div>
+          <span class="mem-indicator" id="memIndicator">M</span>
+        </div>
+
+        <div
+          class="sci-display"
+          id="sciDisplayBox"
+          role="status"
+          aria-live="polite"
+        >
+          <div class="sci-expression" id="sciExpression"></div>
+          <div class="sci-result" id="sciResult">0</div>
+        </div>
+
+        <div class="sci-buttons">
+          <button class="sci-btn memory" data-action="mc" title="Memory Clear">
+            MC
+          </button>
+          <button class="sci-btn memory" data-action="mr" title="Memory Recall">
+            MR
+          </button>
+          <button class="sci-btn memory" data-action="mplus" title="Memory Add">
+            M+
+          </button>
+          <button
+            class="sci-btn memory"
+            data-action="mminus"
+            title="Memory Subtract"
+          >
+            M−
+          </button>
+          <button class="sci-btn clear" data-action="clear" title="Clear (Esc)">
+            C
+          </button>
+
+          <button class="sci-btn function" data-action="sin">sin</button>
+          <button class="sci-btn function" data-action="cos">cos</button>
+          <button class="sci-btn function" data-action="tan">tan</button>
+          <button class="sci-btn function" data-action="log">log</button>
+          <button class="sci-btn function" data-action="ln">ln</button>
+
+          <button class="sci-btn function" data-action="asin">sin⁻¹</button>
+          <button class="sci-btn function" data-action="acos">cos⁻¹</button>
+          <button class="sci-btn function" data-action="atan">tan⁻¹</button>
+          <button class="sci-btn function" data-action="pi">π</button>
+          <button class="sci-btn clear" data-action="back" title="Backspace">
+            ⌫
+          </button>
+
+          <button class="sci-btn function" data-action="sqr">x²</button>
+          <button class="sci-btn function" data-action="cube">x³</button>
+          <button class="sci-btn function" data-action="pow">xʸ</button>
+          <button class="sci-btn function" data-action="sqrt">√</button>
+          <button class="sci-btn function" data-action="inv">1/x</button>
+
+          <button class="sci-btn operator" data-action="lparen">(</button>
+          <button class="sci-btn operator" data-action="rparen">)</button>
+          <button class="sci-btn function" data-action="e">e</button>
+          <button class="sci-btn function" data-action="fact">n!</button>
+          <button class="sci-btn function" data-action="percent">%</button>
+
+          <button class="sci-btn" data-action="7">7</button>
+          <button class="sci-btn" data-action="8">8</button>
+          <button class="sci-btn" data-action="9">9</button>
+          <button class="sci-btn operator" data-action="div">÷</button>
+          <button class="sci-btn operator" data-action="mul">×</button>
+
+          <button class="sci-btn" data-action="4">4</button>
+          <button class="sci-btn" data-action="5">5</button>
+          <button class="sci-btn" data-action="6">6</button>
+          <button class="sci-btn operator" data-action="sub">−</button>
+          <button class="sci-btn operator" data-action="add">+</button>
+
+          <button class="sci-btn" data-action="1">1</button>
+          <button class="sci-btn" data-action="2">2</button>
+          <button class="sci-btn" data-action="3">3</button>
+          <button class="sci-btn operator" data-action="neg">±</button>
+          <button
+            class="sci-btn equal"
+            data-action="equal"
+            style="grid-row: span 2"
+          >
+            =
+          </button>
+
+          <button class="sci-btn" data-action="0" style="grid-column: span 2">
+            0
+          </button>
+          <button class="sci-btn" data-action="dot">.</button>
+          <button class="sci-btn function" data-action="ans">Ans</button>
+        </div>
+
+        <div class="history-header" style="margin-top: 1rem">
+          <span>History</span>
+          <button class="history-clear" id="historyClear">Clear All</button>
+        </div>
+        <div class="history-box empty" id="historyBox"></div>
+      </div>
+
+      <div id="gwaPanel" class="gwa-panel">
+        <div class="table-wrap">
+          <table class="subject-table" id="subjectTable">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th style="text-align: center">Units</th>
+                <th style="text-align: center">Grade</th>
+                <th style="text-align: center; width: 50px"></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <datalist id="subjectPresets">
+          <option value="Mathematics"></option>
+          <option value="English"></option>
+          <option value="Science"></option>
+          <option value="Filipino"></option>
+          <option value="Araling Panlipunan"></option>
+          <option value="PE"></option>
+          <option value="NSTP"></option>
+          <option value="Programming"></option>
+          <option value="Data Structures"></option>
+          <option value="Calculus"></option>
+          <option value="Physics"></option>
+          <option value="Chemistry"></option>
+          <option value="Biology"></option>
+        </datalist>
+
+        <div class="action-bar">
+          <button class="btn btn-outline" id="addSubjectBtn">
+            Add Subject
+          </button>
+          <button class="btn btn-primary" id="calculateBtn">
+            Calculate GWA
+          </button>
+          <button class="btn btn-clear" id="clearBtn">Clear All</button>
+        </div>
+
+        <div
+          id="errorDisplay"
+          class="error-msg empty-error"
+          style="display: none"
+        ></div>
+
+        <div class="result-area" id="resultArea">
+          <div class="gwa-big">
+            <span class="gwa-label">TOTAL GWA</span>
+            <span class="gwa-number" id="gwaNumber" title="Click to copy"
+              >—</span
+            >
+            <span
+              class="honor-badge"
+              id="honorBadge"
+              style="display: none"
+            ></span>
+          </div>
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-label">Subjects</span>
+              <span class="stat-value" id="totalSubjects">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Units</span>
+              <span class="stat-value" id="totalUnits">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Weighted</span>
+              <span class="stat-value" id="totalWeighted">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
